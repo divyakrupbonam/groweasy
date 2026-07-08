@@ -1,0 +1,47 @@
+/**
+ * Single source of truth for the GrowEasy CRM lead schema.
+ * Used to (a) build the AI extraction prompt and (b) validate/normalize
+ * whatever the model returns, so the two never drift apart.
+ */
+
+const CRM_STATUS_VALUES = [
+  'GOOD_LEAD_FOLLOW_UP',
+  'DID_NOT_CONNECT',
+  'BAD_LEAD',
+  'SALE_DONE',
+];
+
+const DATA_SOURCE_VALUES = [
+  'leads_on_demand',
+  'meridian_tower',
+  'eden_park',
+  'varah_swamy',
+  'sarjapur_plots',
+];
+
+const CRM_FIELDS = [
+  { key: 'created_at', description: 'Lead creation date/time. Must be parseable by JavaScript `new Date(created_at)`. If unknown, use empty string.' },
+  { key: 'name', description: 'Full name of the lead.' },
+  { key: 'email', description: 'Primary email address. If several exist, use the first and append the rest to crm_note.' },
+  { key: 'country_code', description: 'Phone country code, e.g. "+91". Infer from the number/locale when possible; leave blank if not confidently inferable.' },
+  { key: 'mobile_without_country_code', description: 'Mobile number WITHOUT the country code. If several numbers exist, use the first and append the rest to crm_note.' },
+  { key: 'company', description: 'Company / organisation name.' },
+  { key: 'city', description: 'City.' },
+  { key: 'state', description: 'State / province.' },
+  { key: 'country', description: 'Country.' },
+  { key: 'lead_owner', description: 'The salesperson/agent/owner assigned to this lead (often an email).' },
+  { key: 'crm_status', description: `Lead status. Must be exactly one of: ${CRM_STATUS_VALUES.join(', ')}. If nothing in the row implies a status, leave it empty string.` },
+  { key: 'crm_note', description: 'Free-text notes: remarks, follow-up notes, extra comments, extra phone numbers, extra emails, and anything useful that does not fit another field.' },
+  { key: 'data_source', description: `Where the lead came from. Must be exactly one of: ${DATA_SOURCE_VALUES.join(', ')}, or empty string if nothing matches confidently. Never invent a value outside this list.` },
+  { key: 'possession_time', description: 'Property possession time, if this is a real-estate lead (e.g. "Ready to move", "Dec 2026").' },
+  { key: 'description', description: 'Any additional free-text description that does not belong in crm_note.' },
+];
+
+const CRM_FIELD_KEYS = CRM_FIELDS.map((f) => f.key);
+
+module.exports = {
+  CRM_STATUS_VALUES,
+  DATA_SOURCE_VALUES,
+  CRM_FIELDS,
+  CRM_FIELD_KEYS,
+};

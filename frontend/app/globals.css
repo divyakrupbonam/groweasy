@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+html, body {
+  background-color: #EEF1EF;
+  color: #14161C;
+}
+
+::selection {
+  background-color: #1F8A82;
+  color: white;
+}
+
+/* Sticky-header scrollable table shell used by both preview & results tables */
+.data-scroll {
+  overflow: auto;
+  max-height: 60vh;
+  border: 1px solid #D7DBD8;
+  border-radius: 8px;
+  background: white;
+}
+
+.data-scroll table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.8125rem;
+}
+
+.data-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #14161C;
+  color: #EEF1EF;
+  text-align: left;
+  padding: 0.55rem 0.85rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom: 1px solid #14161C;
+}
+
+.data-scroll tbody td {
+  padding: 0.5rem 0.85rem;
+  white-space: nowrap;
+  border-bottom: 1px solid #EEF1EF;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.data-scroll tbody tr:hover {
+  background: #F5F7F6;
+}
+
+.data-scroll tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.1s ease-in-out infinite;
+}
