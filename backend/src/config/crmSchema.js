@@ -23,7 +23,7 @@ const CRM_FIELDS = [
     { key: 'created_at', description: 'Lead creation date/time. Must be parseable by JavaScript `new Date(created_at)`. If unknown, use empty string.' },
     { key: 'name', description: 'Full name of the lead.' },
     { key: 'email', description: 'Primary email address. If several exist, use the first and append the rest to crm_note.' },
-    { key: 'country_code', description: 'Phone country code, e.g. "+91". Infer from the number/locale when possible; leave blank if not confidently inferable.' },
+    { key: 'country_code', description: 'Phone country code, e.g. "+91". Actively infer this — do not leave blank just because it is not explicitly stated. Rules: if a mobile number is exactly 10 digits with no country prefix and the row\'s city/state/country/context suggests India (or gives no contrary signal), infer "+91". If the number already includes a country code (e.g. starts with "91" and is 12 digits, or has a "+" prefix), extract it and strip it from mobile_without_country_code. If a country name/city clearly indicates a different nation, infer that country\'s calling code instead. Only leave it "" if there is truly no phone number and no locale signal to infer from.' },
     { key: 'mobile_without_country_code', description: 'Mobile number WITHOUT the country code. If several numbers exist, use the first and append the rest to crm_note.' },
     { key: 'company', description: 'Company / organisation name.' },
     { key: 'city', description: 'City.' },
