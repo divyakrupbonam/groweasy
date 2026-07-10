@@ -160,8 +160,7 @@ tests.
 
 ## Submission
 
-Position applying for: **[fill in: Software Developer Intern / Software
-Developer (Full-Time)]**
+Position applying for: **Software Developer Intern**
 
 Per the assignment brief, email `varun@groweasy.ai` with:
 - Hosted application URL
